@@ -1,38 +1,24 @@
-def validate_side(side):
-    side = side.upper()
+# Binance Futures Testnet Trading Bot
 
-    if side not in ["BUY", "SELL"]:
-        raise ValueError("Side must be BUY or SELL")
+## Setup
 
-    return side
+pip install -r requirements.txt
 
+Create .env
 
-def validate_order_type(order_type):
-    order_type = order_type.upper()
+BINANCE_API_KEY=...
+BINANCE_API_SECRET=...
 
-    if order_type not in ["MARKET", "LIMIT"]:
-        raise ValueError("Order type must be MARKET or LIMIT")
+## Run
 
-    return order_type
+Market Order
 
+python cli.py --symbol BTCUSDT --side BUY --type MARKET --quantity 0.001
 
-def validate_quantity(quantity):
+Limit Order
 
-    qty = float(quantity)
+python cli.py --symbol BTCUSDT --side SELL --type LIMIT --quantity 0.001 --price 120000
 
-    if qty <= 0:
-        raise ValueError("Quantity must be greater than zero")
+Logs are stored in:
 
-    return qty
-
-
-def validate_price(price, order_type):
-
-    if order_type == "LIMIT":
-
-        if price is None:
-            raise ValueError("Price required for LIMIT order")
-
-        return float(price)
-
-    return None
+logs/trading.log
